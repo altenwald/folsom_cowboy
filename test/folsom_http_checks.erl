@@ -57,6 +57,7 @@ run() ->
 
 metrics_checks() ->
     Body1 = http_helpers:http_get(?BASE_METRICS_URL),
+    ?debugFmt("http: ~p~n", [Body1]),
     List1 = mochijson2:decode(Body1),
     true = lists:member(<<"counter">>, List1),
     ?debugFmt("http: ~p~n", [List1]),

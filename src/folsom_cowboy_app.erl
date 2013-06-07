@@ -33,8 +33,9 @@
 -define(APP, folsom_cowboy).
 
 start(_Type, _Args) ->
+	Dispatch = cowboy_router:compile(env(dispatch)), 
     cowboy:start_http(folsom_cowboy_listener, env(num_acceptors),
-                      [{port, env(port)}], [{env, [{dispatch, env(dispatch)}]}]),
+                      [{port, env(port)}], [{env, [{dispatch, Dispatch}]}]),
     folsom_cowboy_sup:start_link().
 
 stop(_State) ->
